@@ -24,7 +24,7 @@ autocmd('TextYankPost', {
 autocmd({"BufWritePre"}, {
     group = grahamboreeGroup,
     pattern = "*",
-    command = [[%s/\s\+$//e]],
+    command = [[let save_cursor = getpos(".") | %s/\s\+$//e | call setpos('.', save_cursor)]],
 })
 
 -- for .bytes files in Unity
