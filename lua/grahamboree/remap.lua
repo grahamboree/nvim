@@ -33,7 +33,7 @@ vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
 -- quick search and replace for word under cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/g<Left><Left>]])
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/<Left>]])
 
 -- buffer swapping
 vim.keymap.set("n", "<Tab>", "<cmd>bnext<cr>")
