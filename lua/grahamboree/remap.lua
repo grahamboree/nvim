@@ -20,14 +20,14 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.keymap.set("n", "=ap", "ma=ap'a")
 
 -- yank to system clipboard
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 -- paste without overwriting default register
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
 -- delete line without clearing default register
-vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
+vim.keymap.set({ "n", "v" }, "<leader>d", "\"_d")
 
 -- format with the current lsp
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
@@ -42,3 +42,6 @@ vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>")
 -- quick macro execute, instead of Ex mode which is useless
 vim.keymap.set("n", "Q", "@q")
 
+-- error navigation to mimic Rider
+vim.keymap.set("n", "<leader>v", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>c", vim.diagnostic.goto_prev)
