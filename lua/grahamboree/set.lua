@@ -30,7 +30,7 @@ vim.opt.termguicolors = true
 vim.opt.wrap = false
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "no"
-vim.opt.colorcolumn = "128"
+--vim.opt.colorcolumn = "128"
 vim.opt.textwidth = 0           -- Hard-wrap long lines as you type them.
 vim.opt.linespace = 0           -- Set line-spacing to minimum.
 
