@@ -65,5 +65,6 @@ vim.diagnostic.config({
   severity_sort = true,      -- Show errors above warnings etc.
 })
 
+vim.cmd.colorscheme("catppuccin-mocha")
 
 

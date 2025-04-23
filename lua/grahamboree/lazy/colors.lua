@@ -1,21 +1,4 @@
-function SetColors(color)
-    color = color or "rose-pine-moon"
-    vim.cmd.colorscheme(color)
-
-    --vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-    --vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-end
-
 return {
-    { "erikbackman/brightburn.vim" },
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        opts = {},
-        config = function()
-            SetColors()
-        end
-    },
     {
         "ellisonleao/gruvbox.nvim",
         name = "gruvbox",
@@ -46,49 +29,6 @@ return {
             })
         end,
     },
-    {
-        "folke/tokyonight.nvim",
-        config = function()
-            require("tokyonight").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                style = "storm",        -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-                transparent = true,     -- Enable this to disable setting the background color
-                terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-                styles = {
-                    -- Style to be applied to different syntax groups
-                    -- Value is any valid attr-list value for `:help nvim_set_hl`
-                    comments = { italic = false },
-                    keywords = { italic = false },
-                    -- Background styles. Can be "dark", "transparent" or "normal"
-                    sidebars = "dark", -- style for sidebars, see below
-                    floats = "dark",   -- style for floating windows
-                },
-            })
-        end
-    },
-
-    {
-        "rose-pine/neovim",
-        name = "rose-pine",
-        config = function()
-            require('rose-pine').setup({
-                styles = {
-                    --italic = false,
-                },
-            })
-
-            SetColors();
-        end
-    },
-
-    {
-        "ecthelionvi/NeoColumn.nvim",
-        opts = {
-            fg_color = string.format("#%06x", vim.api.nvim_get_hl(0, { name = "Search" }).fg),
-            bg_color = string.format("#%06x", vim.api.nvim_get_hl(0, { name = "Search" }).bg),
-            Neocolumn = 128,
-            always_on = true
-        }
-    }
+    { "rose-pine/neovim" },
+    { "catppuccin/nvim" },
 }
