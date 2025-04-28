@@ -45,3 +45,31 @@ vim.keymap.set("n", "Q", "@q")
 -- error navigation to mimic Rider
 vim.keymap.set("n", "<leader>v", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>c", vim.diagnostic.goto_prev)
+
+-- Change ctrl+w o to toggle between maximizing a window
+-- Reduces pain of accidentally hitting it
+local maximize_session = nil
+local maximize_hidden_save = nil
+
+function MaximizeToggle()
+  if maximize_session then
+    vim.cmd('source ' .. vim.fn.fnameescape(maximize_session))
+
+    -- delete the temp file
+    vim.fn.delete(maximize_session)
+    maximize_session = nil
+    vim.o.hidden = maximize_hidden_save
+    maximize_hidden_save = nil
+  else
+    maximize_hidden_save = vim.o.hidden
+    maximize_session = vim.fn.tempname()
+    vim.o.hidden = true
+    vim.cmd('mksession! ' .. vim.fn.fnameescape(maximize_session))
+    vim.cmd('only')
+  end
+end
+
+vim.keymap.set('n', '<C-W>O', MaximizeToggle, { silent = true })
+vim.keymap.set('n', '<C-W>o', MaximizeToggle, { silent = true })
+vim.keymap.set('n', '<C-W><C-O>', MaximizeToggle, { silent = true })
+
