@@ -6,28 +6,29 @@ return {
         'nvim-tree/nvim-web-devicons'
     },
     config = function()
-        local builtin = require('telescope.builtin')
-        require('telescope').setup({
+        require('telescope').setup {
             defaults = {
                 file_ignore_patterns = {
-                    "node_modules",
-                    "%.git/",
-                    "Engine/", -- for Spirit Crossing
-                    "venv/",
-                    ".venv/",
-                    "build/",
-                    "dist/",
-                    "obj/",
-                    "__pycache__/",
+                    'node_modules',
+                    '%.git/',
+                    'Engine/', -- for Spirit Crossing
+                    'venv/',
+                    '.venv/',
+                    'build/',
+                    'dist/',
+                    'obj/',
+                    '__pycache__/',
                 }
             }
-        })
+        }
 
+        local builtin = require('telescope.builtin')
         local utils = require('grahamboree.utils')
-        utils.nremap('<leader>pf', builtin.find_files)
-        utils.nremap('<leader>pg', builtin.live_grep)
-        utils.nremap('<leader>vh', builtin.help_tags)
-        utils.nremap('<leader>g', function() builtin.live_grep { default_text = vim.fn.expand('<cword>') } end)
-        utils.vremap('<leader>g', function() builtin.live_grep { default_text = utils.getVisualText() } end)
+
+        vim.keymap.set('n', '<leader>pf', builtin.find_files)
+        vim.keymap.set('n', '<leader>pg', builtin.live_grep)
+        vim.keymap.set('n', '<leader>vh', builtin.help_tags)
+        vim.keymap.set('n', '<leader>g', function() builtin.live_grep { default_text = vim.fn.expand('<cword>') } end)
+        vim.keymap.set('v', '<leader>g', function() builtin.live_grep { default_text = utils.getVisualText() } end)
     end
 }
