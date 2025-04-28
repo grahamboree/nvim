@@ -29,11 +29,11 @@ vim.opt.magic = true      -- Use 'magic' patterns (extended regular expressions)
 vim.opt.termguicolors = true
 
 -- wrapping and columns
-vim.opt.wrap = false        -- No line wrapping
-vim.opt.scrolloff = 8       -- Keep the cursor at least 8 lines from the top or bottom of the window
-vim.opt.signcolumn = 'auto' -- Don't draw the sign column unless necessary
-vim.opt.textwidth = 0       -- Hard-wrap long lines as you type them.
-vim.opt.linespace = 0       -- Set line-spacing to minimum.
+vim.opt.wrap = false      -- No line wrapping
+vim.opt.scrolloff = 8     -- Keep the cursor at least 8 lines from the top or bottom of the window
+vim.opt.signcolumn = 'no' -- Don't draw the sign column unless necessary
+vim.opt.textwidth = 0     -- Hard-wrap long lines as you type them.
+vim.opt.linespace = 0     -- Set line-spacing to minimum.
 
 -- UI/UX
 vim.opt.updatetime = 50
