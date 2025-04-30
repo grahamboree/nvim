@@ -11,7 +11,8 @@ return {
                 file_ignore_patterns = {
                     'node_modules',
                     '%.git/',
-                    'Engine/', -- for Spirit Crossing
+                    'Engine/',       -- for Spirit Crossing
+                    'Intermediate/', -- for Spirit Crossing
                     'venv/',
                     '.venv/',
                     'build/',
