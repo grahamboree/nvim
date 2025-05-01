@@ -1,4 +1,4 @@
-vim.g.mapleader = ' '
+vim.g.mapleader = " "
 
 -- line numbers
 vim.opt.number = true         -- line numbers
@@ -14,7 +14,7 @@ vim.opt.smartindent = true -- indent things using basic syntax information
 -- swap files and undo
 vim.opt.swapfile = false                               -- Don't use swap files
 vim.opt.backup = false                                 -- Don't keep backups of unsaved buffers
-vim.opt.undodir = os.getenv('HOME') .. '/.vim/undodir' -- Set undo history dir
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Set undo history dir
 vim.opt.undofile = true                                -- Use an undo file
 
 -- searching
@@ -31,7 +31,7 @@ vim.opt.termguicolors = true
 -- wrapping and columns
 vim.opt.wrap = false      -- No line wrapping
 vim.opt.scrolloff = 8     -- Keep the cursor at least 8 lines from the top or bottom of the window
-vim.opt.signcolumn = 'no' -- Don't draw the sign column unless necessary
+vim.opt.signcolumn = "no" -- Don't draw the sign column unless necessary
 vim.opt.textwidth = 0     -- Hard-wrap long lines as you type them.
 vim.opt.linespace = 0     -- Set line-spacing to minimum.
 
@@ -61,15 +61,15 @@ vim.opt.joinspaces = false -- Prevents inserting two spaces after punctuation on
 
 -- Ignore certain file patterns
 local ignored = {
-    '*.git/*',
-    '*.so',
-    '*.swp',
-    '*.zip',
-    '*.meta',
-    '*.pyc',
-    '*.o'
+    "*.git/*",
+    "*.so",
+    "*.swp",
+    "*.zip",
+    "*.meta",
+    "*.pyc",
+    "*.o"
 }
-vim.opt.wildignore:append(table.concat(ignored, ','))
+vim.opt.wildignore:append(table.concat(ignored, ","))
 
 -- languages
 vim.g.lua_syntax_fancynotequal = 1

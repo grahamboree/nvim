@@ -5,24 +5,24 @@ require("grahamboree.lazy_init")
 local autocmd = vim.api.nvim_create_autocmd
 
 -- highlight yanked text briefly
-autocmd('TextYankPost', {
-    pattern = '*',
+autocmd("TextYankPost", {
+    pattern = "*",
     callback = function()
         vim.highlight.on_yank({
-            higroup = 'IncSearch',
+            higroup = "IncSearch",
             timeout = 40,
         })
     end,
 })
 
 -- trim trailing whitespace on save
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
     pattern = "*",
-    command = [[let save_cursor = getpos(".") | %s/\s\+$//e | call setpos('.', save_cursor)]],
+    command = [[let save_cursor = getpos(".") | %s/\s\+$//e | call setpos(".", save_cursor)]],
 })
 
 -- LSP keybinds
-autocmd('LspAttach', {
+autocmd("LspAttach", {
     callback = function(e)
         local opts = { buffer = e.buf }
         --vim.keymap.set("n", "<F12>", function() vim.lsp.buf.definition() end, opts)
@@ -48,13 +48,11 @@ vim.filetype.add({
 
 -- Diagnostics
 vim.diagnostic.config({
-  virtual_text = true,   -- Show inline text
-  signs = true,          -- Show signs in the gutter
-  underline = true,      -- Underline the problematic code
-  update_in_insert = false,  -- Don't update while typing
-  severity_sort = true,      -- Show errors above warnings etc.
+    virtual_text = true,      -- Show inline text
+    signs = true,             -- Show signs in the gutter
+    underline = true,         -- Underline the problematic code
+    update_in_insert = false, -- Don't update while typing
+    severity_sort = true,     -- Show errors above warnings etc.
 })
 
 vim.cmd.colorscheme("catppuccin-mocha")
-
-
