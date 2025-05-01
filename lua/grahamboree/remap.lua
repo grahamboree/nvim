@@ -52,3 +52,5 @@ vim.keymap.set("n", "<C-W>O", utils.maximize_toggle)
 vim.keymap.set("n", "<C-W>o", utils.maximize_toggle)
 vim.keymap.set("n", "<C-W><C-O>", utils.maximize_toggle)
 
+vim.keymap.set("n", "<Leader>a", utils.alt_file_switcher)
+

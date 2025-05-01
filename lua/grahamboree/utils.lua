@@ -47,4 +47,48 @@ function m.maximize_toggle()
     end
 end
 
+function m.alt_file_switcher()
+    local current_file = vim.api.nvim_buf_get_name(0)
+    local filename = vim.fn.fnamemodify(current_file, ":t:r")
+    local extension = vim.fn.fnamemodify(current_file, ":e")
+
+    local glob = ""
+    if (extension == "h" or extension == "hpp") then
+        glob = string.format("**/%s.{c,cpp}", filename)
+    else
+        glob = string.format("**/%s.{h,hpp}", filename)
+    end
+
+    local files = vim.fn.glob(glob, false, true)
+
+    if (#files == 0) then
+        print("No alternate file found")
+    elseif (#files == 1) then
+        vim.cmd.edit(files[1])
+    else
+        -- Show a telescope picker to choose the appropriate file
+        local pickers = require "telescope.pickers"
+        local finders = require "telescope.finders"
+        local conf = require("telescope.config").values
+        local actions = require "telescope.actions"
+        local action_state = require "telescope.actions.state"
+
+        local opts = {}
+        pickers.new(opts, {
+            prompt_title = "Alternate File",
+            finder = finders.new_table { results = files },
+            previewer = conf.file_previewer(opts),
+            sorter = conf.file_sorter(opts),
+            attach_mappings = function(prompt_bufnr, map)
+                actions.select_default:replace(function()
+                    actions.close(prompt_bufnr)
+                    local selection = action_state.get_selected_entry()
+                    vim.cmd.edit(selection[1])
+                end)
+                return true
+            end,
+        }):find()
+    end
+end
+
 return m
