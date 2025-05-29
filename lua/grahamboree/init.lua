@@ -21,6 +21,28 @@ autocmd({ "BufWritePre" }, {
     command = [[let save_cursor = getpos(".") | %s/\s\+$//e | call setpos(".", save_cursor)]],
 })
 
+-- Auto p4 edit for read-only files
+vim.api.nvim_create_autocmd("FileChangedRO", {
+    pattern = "*",
+    callback = function()
+        local file_path = vim.fn.expand("%")
+        local result = vim.fn.system("p4 edit " .. vim.fn.shellescape(file_path))
+
+        if vim.v.shell_error == 0 then
+            -- Success
+            vim.notify("File checked out: " .. file_path, vim.log.levels.INFO)
+            -- Reload the buffer to apply the new permissions
+            vim.cmd("edit!")
+            return true -- Indicate that the readonly state has been handled
+        else
+            -- Failed
+            vim.notify("Failed to checkout file: " .. result, vim.log.levels.ERROR)
+            return false
+        end
+    end,
+    desc = "Automatically run p4 edit on read-only files",
+})
+
 -- LSP keybinds
 autocmd("LspAttach", {
     callback = function(e)
