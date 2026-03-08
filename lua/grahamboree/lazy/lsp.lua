@@ -26,12 +26,28 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
-                "lua_ls"
+                "lua_ls",
+                "clangd",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
                     require("lspconfig")[server_name].setup {
                         capabilities = capabilities
+                    }
+                end,
+
+                ["clangd"] = function()
+                    require("lspconfig").clangd.setup {
+                        capabilities = capabilities,
+                        cmd = {
+                            "clangd",
+                            "--background-index",
+                            "--clang-tidy",
+                            "--header-insertion=iwyu",
+                            "--completion-style=detailed",
+                            "--function-arg-placeholders",
+                            "--query-driver=/usr/bin/c++,/usr/bin/cc,/usr/bin/clang,/usr/bin/clang++",
+                        },
                     }
                 end,
 
