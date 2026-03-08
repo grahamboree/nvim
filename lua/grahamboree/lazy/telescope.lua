@@ -27,13 +27,16 @@ return {
         local utils = require("grahamboree.utils")
 
         vim.keymap.set("n", "<leader>pf", builtin.find_files)
+        vim.keymap.set("n", "<leader>pb", builtin.buffers)
         vim.keymap.set("n", "<leader>pg", builtin.live_grep)
         vim.keymap.set("n", "<leader>vh", builtin.help_tags)
+        vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find)
         vim.keymap.set("n", "<leader>g", function()
             builtin.live_grep { default_text = vim.fn.expand("<cword>") }
         end)
         vim.keymap.set("v", "<leader>g", function()
             builtin.live_grep { default_text = utils.get_visual_text() }
         end)
+        vim.keymap.set("n", "<leader>lrr", builtin.lsp_references)
     end
 }
