@@ -16,7 +16,7 @@ autocmd("TextYankPost", {
 })
 
 -- trim trailing whitespace on save
-autocmd({ "BufWritePre" }, {
+autocmd("BufWritePre", {
     pattern = "*",
     command = [[let save_cursor = getpos(".") | %s/\s\+$//e | call setpos(".", save_cursor)]],
 })
@@ -47,16 +47,19 @@ vim.api.nvim_create_autocmd("FileChangedRO", {
 autocmd("LspAttach", {
     callback = function(e)
         local opts = { buffer = e.buf }
-        --vim.keymap.set("n", "<F12>", function() vim.lsp.buf.definition() end, opts)
-        --vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        --vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, opts)
-        --vim.keymap.set("n", "<leader>lws", function() vim.lsp.buf.workspace_symbol() end, opts)
-        --vim.keymap.set("n", "<leader>lca", function() vim.lsp.buf.code_action() end, opts)
+        vim.keymap.set("n", "<leader>lg", function() vim.lsp.buf.definition() end, opts)
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
+        vim.keymap.set("n", "<leader>lws", function() vim.lsp.buf.workspace_symbol() end, opts)
+        vim.keymap.set("n", "<leader>lca", function() vim.lsp.buf.code_action() end, opts)
+        -- done in telescope instead...
         --vim.keymap.set("n", "<leader>lrr", function() vim.lsp.buf.references() end, opts)
-        --vim.keymap.set("n", "<leader>lrn", function() vim.lsp.buf.rename() end, opts)
+        vim.keymap.set("n", "<leader>lrn", function() vim.lsp.buf.rename() end, opts)
         --vim.keymap.set("i", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
-        --vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-        --vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+
+        -- Diagnostics
+        vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, opts)
+        vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
+        vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
     end
 })
 
