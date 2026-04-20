@@ -47,6 +47,7 @@ return {
                             "--completion-style=detailed",
                             "--function-arg-placeholders",
                             "--query-driver=/usr/bin/c++,/usr/bin/cc,/usr/bin/clang,/usr/bin/clang++",
+                            "--inlay-hints=true",
                         },
                     }
                 end,

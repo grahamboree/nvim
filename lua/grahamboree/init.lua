@@ -60,6 +60,15 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, opts)
         vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
         vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
+
+        -- Inlay hints (enable by default, toggle with <leader>lh)
+        local client = vim.lsp.get_client_by_id(e.data.client_id)
+        if client and client.supports_method("textDocument/inlayHint") then
+            vim.lsp.inlay_hint.enable(true, { bufnr = e.buf })
+        end
+        vim.keymap.set("n", "<leader>lh", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = e.buf }), { bufnr = e.buf })
+        end, vim.tbl_extend("force", opts, { desc = "Toggle inlay hints" }))
     end
 })
 
