@@ -67,7 +67,9 @@ autocmd("LspAttach", {
 vim.filetype.add({
     extension = {
         jenkins = "groovy",
-        bytes = "yaml"
+        bytes = "yaml",
+        hlsl = "hlsl",
+        hlsli = "hlsl",
     },
 })
 
