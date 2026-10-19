@@ -1,6 +1,9 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
+        -- master is frozen; main is the rewrite this config targets (ts.install,
+        -- ts.get_installed). Pin it so a fresh clone can't land on master.
+        branch = "main",
         lazy = false,
         build = ":TSUpdate",
         config = function()
