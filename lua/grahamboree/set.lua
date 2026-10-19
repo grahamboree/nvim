@@ -22,7 +22,6 @@ vim.opt.hlsearch = true   -- highlight search results
 vim.opt.incsearch = true  -- show results as you type
 vim.opt.ignorecase = true -- Make searching case insensitive.
 vim.opt.smartcase = true  -- ... unless the query has capital letters.
-vim.opt.gdefault = true   -- Use 'g' flag by default with :s/foo/bar/.
 vim.opt.magic = true      -- Use 'magic' patterns (extended regular expressions).
 
 -- colors
@@ -31,7 +30,7 @@ vim.opt.termguicolors = true
 -- wrapping and columns
 vim.opt.wrap = false      -- No line wrapping
 vim.opt.scrolloff = 8     -- Keep the cursor at least 8 lines from the top or bottom of the window
-vim.opt.signcolumn = "no" -- Don't draw the sign column unless necessary
+vim.opt.signcolumn = "yes" -- Always draw the sign column so text does not shift when diagnostics appear
 vim.opt.textwidth = 0     -- Hard-wrap long lines as you type them.
 vim.opt.linespace = 0     -- Set line-spacing to minimum.
 
