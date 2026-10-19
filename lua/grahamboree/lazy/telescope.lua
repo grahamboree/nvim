@@ -5,8 +5,12 @@ return {
         {
             'nvim-telescope/telescope-fzf-native.nvim',
             -- no prebuilt binaries; make on Unix, cmake + MSVC build tools on Windows
+            -- A list runs each step in turn; '&&' is not valid in Windows PowerShell 5.1.
             build = jit.os == 'Windows'
-                and 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install'
+                and {
+                    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release',
+                    'cmake --build build --config Release --target install',
+                }
                 or 'make',
         },
     },
