@@ -5,11 +5,7 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
     },
 
@@ -66,20 +62,36 @@ return {
 
         cmp.setup({
             snippet = {
+                -- Neovim's built-in snippet engine handles LSP snippets.
                 expand = function(args)
-                    require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+                    vim.snippet.expand(args.body)
                 end,
             },
             mapping = cmp.mapping.preset.insert({
                 ["<up>"] = cmp.mapping.select_prev_item(cmp_select),
                 ["<down>"] = cmp.mapping.select_next_item(cmp_select),
-                ["<tab>"] = cmp.mapping.confirm({ select = true }),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
+                -- Tab confirms a completion, or jumps to the next snippet tabstop.
+                ["<Tab>"] = cmp.mapping(function(fallback)
+                    if cmp.visible() then
+                        cmp.confirm({ select = true })
+                    elseif vim.snippet.active({ direction = 1 }) then
+                        vim.snippet.jump(1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
+                ["<S-Tab>"] = cmp.mapping(function(fallback)
+                    if vim.snippet.active({ direction = -1 }) then
+                        vim.snippet.jump(-1)
+                    else
+                        fallback()
+                    end
+                end, { "i", "s" }),
             }),
             sources = cmp.config.sources({
                 { name = "nvim_lsp" },
-                { name = "luasnip" }, -- For luasnip users.
             }, {
                 { name = "buffer" },
             }),
