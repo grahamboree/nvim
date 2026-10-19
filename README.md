@@ -39,8 +39,10 @@ Two more things are required:
   telescope-fzf-native
 
 The config picks the right build command and clangd compiler globs by
-checking `jit.os`, so nothing needs editing. `p4 edit` on read-only files
-works as long as `p4.exe` is on `PATH`.
+checking `jit.os`, so nothing needs editing. On Windows the shell is set to
+pwsh (or Windows PowerShell if pwsh is absent) rather than cmd.exe, so `:!`,
+`:terminal` and the `p4 edit` autocmd behave like a modern shell. `p4.exe`
+must be on `PATH`.
 
 ## First launch
 

@@ -74,3 +74,23 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+-- Windows: use PowerShell for :!, system() and :terminal instead of cmd.exe.
+-- Settings follow :h shell-powershell / shell-pwsh. pwsh (PowerShell 7) is
+-- preferred when installed, with Windows PowerShell as the fallback.
+if jit.os == "Windows" then
+    local pwsh = vim.fn.executable("pwsh") == 1
+    vim.opt.shell = pwsh and "pwsh" or "powershell"
+    vim.opt.shellcmdflag = table.concat({
+        "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command ",
+        "[Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();",
+        "$PSDefaultParameterValues['Out-File:Encoding']='utf8';",
+        pwsh and "$PSStyle.OutputRendering='PlainText';" or "",
+    })
+    vim.opt.shellpipe = "> %s 2>&1"
+    vim.opt.shellredir = "> %s 2>&1"
+    vim.opt.shellquote = ""
+    vim.opt.shellxquote = ""
+    vim.opt.shelltemp = false
+    if pwsh then vim.env.__SuppressAnsiEscapeSequences = 1 end
+end
