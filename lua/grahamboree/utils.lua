@@ -48,6 +48,15 @@ function m.maximize_toggle()
 end
 
 function m.alt_file_switcher()
+    -- Prefer clangd: it resolves through the index, so split Public/Private
+    -- layouts and non-matching names work. nvim-lspconfig defines the
+    -- command on attach.
+    if vim.fn.exists(":LspClangdSwitchSourceHeader") == 2 then
+        vim.cmd.LspClangdSwitchSourceHeader()
+        return
+    end
+
+    -- Fallback: glob for a sibling with the matching name
     local current_file = vim.api.nvim_buf_get_name(0)
     local filename = vim.fn.fnamemodify(current_file, ":t:r")
     local extension = vim.fn.fnamemodify(current_file, ":e")
