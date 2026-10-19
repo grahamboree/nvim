@@ -47,6 +47,8 @@ vim.opt.modeline = true    -- Enable modeline.
 
 -- folds and splits
 vim.opt.foldlevel = 99
+vim.opt.foldmethod = "expr" -- Fold using treesitter
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.splitbelow = true -- Horizontal split below current.
 vim.opt.splitright = true -- Vertical split to right of current.
 
