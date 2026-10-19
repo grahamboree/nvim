@@ -1,11 +1,12 @@
 return {
-    'nvim-telescope/telescope.nvim', version = '*',
+    'nvim-telescope/telescope.nvim',
     dependencies = {
         'nvim-lua/plenary.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
     config = function()
-        require("telescope").setup {
+        local telescope = require("telescope")
+        telescope.setup {
             defaults = {
                 file_ignore_patterns = {
                     "node_modules",
@@ -22,6 +23,8 @@ return {
                 }
             }
         }
+        -- use the native fzf sorter for all pickers
+        telescope.load_extension("fzf")
 
         local builtin = require("telescope.builtin")
         local utils = require("grahamboree.utils")
