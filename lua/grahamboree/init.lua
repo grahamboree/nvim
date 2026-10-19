@@ -57,8 +57,16 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
         vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
 
-        -- Inlay hints (enable by default, toggle with <leader>lh)
         local client = vim.lsp.get_client_by_id(e.data.client_id)
+
+        -- Code lens (e.g. Roslyn reference counts). Neovim refreshes them
+        -- itself once enabled; <leader>lc runs the one under the cursor.
+        if client and client:supports_method("textDocument/codeLens") then
+            vim.lsp.codelens.enable(true, { bufnr = e.buf })
+            vim.keymap.set("n", "<leader>lc", vim.lsp.codelens.run, vim.tbl_extend("force", opts, { desc = "Run code lens" }))
+        end
+
+        -- Inlay hints (enable by default, toggle with <leader>lh)
         if client and client:supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(true, { bufnr = e.buf })
         end
