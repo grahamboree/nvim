@@ -3,7 +3,6 @@ return {
     "saghen/blink.cmp",
     version = "1.*", -- release tag, so the prebuilt fuzzy matcher is downloaded
     dependencies = { "folke/lazydev.nvim" },
-    event = "InsertEnter",
     opts = {
         keymap = {
             -- Enter accepts, Up/Down select, C-Space opens, C-e cancels,
