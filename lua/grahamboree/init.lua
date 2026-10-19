@@ -63,7 +63,6 @@ autocmd("LspAttach", {
     callback = function(e)
         local opts = { buffer = e.buf }
         vim.keymap.set("n", "<leader>lg", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
-        vim.keymap.set("n", "<leader>lws", vim.lsp.buf.workspace_symbol, vim.tbl_extend("force", opts, { desc = "Workspace symbols" }))
 
         -- Diagnostics: like the built-in ]d / [d but also opens the float
         vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))

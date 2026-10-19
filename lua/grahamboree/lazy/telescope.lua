@@ -25,6 +25,8 @@ return {
             desc = "Grep selection",
         },
         { "<leader>lrr", function() require("telescope.builtin").lsp_references() end, desc = "References" },
+        { "<leader>ls", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Document symbols" },
+        { "<leader>lws", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc = "Workspace symbols" },
     },
     config = function()
         local telescope = require("telescope")
