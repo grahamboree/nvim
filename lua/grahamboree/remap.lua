@@ -1,59 +1,59 @@
 local utils = require("grahamboree.utils")
+local map = vim.keymap.set
 
 -- NetRW
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+map("n", "<leader>pv", vim.cmd.Ex, { desc = "File explorer" })
 
 -- clear search highlight
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>")
+map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
 -- keep cursor position when joining lines
-vim.keymap.set("n", "J", "mzJ`z")
+map("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
 
 -- center scroll when using half and full page jumps
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-f>", "<C-d><C-d>zz") -- hack
-vim.keymap.set("n", "<C-b>", "<C-u><C-u>zz") -- hack
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "<C-f>", "<C-d><C-d>zz") -- hack
+map("n", "<C-b>", "<C-u><C-u>zz") -- hack
 
 -- center scroll on search result and highlight it
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 
 -- keep cursor position when reindenting paragraph
-vim.keymap.set("n", "=ap", [[ma=ap'a]])
+map("n", "=ap", [[ma=ap'a]], { desc = "Reindent paragraph (keep cursor)" })
 
 -- yank to system clipboard
-vim.keymap.set({ "n", "v" }, "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')
+map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
+map("n", "<leader>Y", '"+Y', { desc = "Yank line to clipboard" })
 
 -- paste without overwriting default register
-vim.keymap.set("x", "<leader>p", '"_dP')
+map("x", "<leader>p", '"_dP', { desc = "Paste (keep register)" })
 
 -- delete line without clearing default register
-vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+map({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete (keep register)" })
 
 -- format with the current lsp
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+map("n", "<leader>f", vim.lsp.buf.format, { desc = "Format buffer" })
 
 -- quick search and replace for word under cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/<Left>]])
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/<Left>]], { desc = "Replace word under cursor" })
 
 -- buffer swapping
-vim.keymap.set("n", "<Tab>", "<cmd>bnext<cr>")
-vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>")
+map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 
 -- quick macro execute, instead of Ex mode which is useless
-vim.keymap.set("n", "Q", "@q")
+map("n", "Q", "@q", { desc = "Run macro q" })
 
 -- error navigation to mimic Rider
-vim.keymap.set("n", "<leader>v", function() vim.diagnostic.jump({ count = 1, float = true }) end)
-vim.keymap.set("n", "<leader>c", function() vim.diagnostic.jump({ count = -1, float = true }) end)
+map("n", "<leader>v", function() vim.diagnostic.jump({ count = 1, float = true }) end, { desc = "Next diagnostic" })
+map("n", "<leader>c", function() vim.diagnostic.jump({ count = -1, float = true }) end, { desc = "Previous diagnostic" })
 
 -- Change ctrl+w o to toggle between maximizing a window
 -- Reduces pain of accidentally hitting it
-vim.keymap.set("n", "<C-W>O", utils.maximize_toggle)
-vim.keymap.set("n", "<C-W>o", utils.maximize_toggle)
-vim.keymap.set("n", "<C-W><C-O>", utils.maximize_toggle)
+map("n", "<C-W>O", utils.maximize_toggle, { desc = "Toggle maximize window" })
+map("n", "<C-W>o", utils.maximize_toggle, { desc = "Toggle maximize window" })
+map("n", "<C-W><C-O>", utils.maximize_toggle, { desc = "Toggle maximize window" })
 
-vim.keymap.set("n", "<Leader>a", utils.alt_file_switcher)
-
+map("n", "<Leader>a", utils.alt_file_switcher, { desc = "Switch source/header" })

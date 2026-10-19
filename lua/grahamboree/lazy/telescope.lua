@@ -28,18 +28,19 @@ return {
 
         local builtin = require("telescope.builtin")
         local utils = require("grahamboree.utils")
+        local map = vim.keymap.set
 
-        vim.keymap.set("n", "<leader>pf", builtin.find_files)
-        vim.keymap.set("n", "<leader>pb", builtin.buffers)
-        vim.keymap.set("n", "<leader>pg", builtin.live_grep)
-        vim.keymap.set("n", "<leader>ph", builtin.help_tags)
-        vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find)
-        vim.keymap.set("n", "<leader>g", function()
+        map("n", "<leader>pf", builtin.find_files, { desc = "Find files" })
+        map("n", "<leader>pb", builtin.buffers, { desc = "Buffers" })
+        map("n", "<leader>pg", builtin.live_grep, { desc = "Live grep" })
+        map("n", "<leader>ph", builtin.help_tags, { desc = "Help tags" })
+        map("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy find in buffer" })
+        map("n", "<leader>g", function()
             builtin.live_grep { default_text = vim.fn.expand("<cword>") }
-        end)
-        vim.keymap.set("v", "<leader>g", function()
+        end, { desc = "Grep word under cursor" })
+        map("v", "<leader>g", function()
             builtin.live_grep { default_text = utils.get_visual_text() }
-        end)
-        vim.keymap.set("n", "<leader>lrr", builtin.lsp_references)
+        end, { desc = "Grep selection" })
+        map("n", "<leader>lrr", builtin.lsp_references, { desc = "References" })
     end
 }

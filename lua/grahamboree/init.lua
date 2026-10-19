@@ -47,19 +47,19 @@ vim.api.nvim_create_autocmd("FileChangedRO", {
 autocmd("LspAttach", {
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "<leader>lg", function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "<leader>lws", function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<leader>lca", function() vim.lsp.buf.code_action() end, opts)
+        vim.keymap.set("n", "<leader>lg", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover" }))
+        vim.keymap.set("n", "<leader>lws", vim.lsp.buf.workspace_symbol, vim.tbl_extend("force", opts, { desc = "Workspace symbols" }))
+        vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
         -- done in telescope instead...
         --vim.keymap.set("n", "<leader>lrr", function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set("n", "<leader>lrn", function() vim.lsp.buf.rename() end, opts)
+        vim.keymap.set("n", "<leader>lrn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
         --vim.keymap.set("i", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
 
         -- Diagnostics
-        vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
-        vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+        vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Line diagnostics" }))
+        vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
+        vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
 
         -- Inlay hints (enable by default, toggle with <leader>lh)
         local client = vim.lsp.get_client_by_id(e.data.client_id)
