@@ -68,3 +68,9 @@ vim.opt.wildignore:append(table.concat(ignored, ","))
 
 -- languages
 vim.g.lua_syntax_fancynotequal = 1
+
+-- remote plugin providers: none are used, skip probing for them
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
