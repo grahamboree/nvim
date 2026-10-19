@@ -15,6 +15,18 @@ autocmd("TextYankPost", {
     end,
 })
 
+-- reload files changed outside Neovim (p4 sync, Unity, Unreal) as soon as
+-- focus returns, instead of on the next write attempt. Scheduled because a
+-- buffer cannot be reloaded while an autocmd is still running.
+autocmd({ "FocusGained", "BufEnter", "TermClose" }, {
+    pattern = "*",
+    callback = function()
+        vim.schedule(function()
+            if vim.o.buftype == "" and vim.fn.mode() ~= "c" then vim.cmd("checktime") end
+        end)
+    end,
+})
+
 -- trim trailing whitespace on save
 autocmd("BufWritePre", {
     pattern = "*",
