@@ -30,9 +30,6 @@ map("x", "<leader>p", '"_dP', { desc = "Paste (keep register)" })
 -- delete line without clearing default register
 map({ "n", "v" }, "<leader>d", '"_d', { desc = "Delete (keep register)" })
 
--- format with the current lsp
-map("n", "<leader>f", vim.lsp.buf.format, { desc = "Format buffer" })
-
 -- quick search and replace for word under cursor
 map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/<Left>]], { desc = "Replace word under cursor" })
 
