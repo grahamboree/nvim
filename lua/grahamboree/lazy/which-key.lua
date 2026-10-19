@@ -8,7 +8,6 @@ return {
             { "<leader>lr", group = "rename/references" },
             { "<leader>p",  group = "find/files" },
             { "<leader>x",  group = "diagnostics" },
-            { "<leader>v",  group = "diagnostics nav" },
         },
     },
 }
