@@ -14,7 +14,6 @@ vim.opt.smartindent = true -- indent things using basic syntax information
 -- swap files and undo
 vim.opt.swapfile = false                               -- Don't use swap files
 vim.opt.backup = false                                 -- Don't keep backups of unsaved buffers
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- Set undo history dir
 vim.opt.undofile = true                                -- Use an undo file
 
 -- searching
