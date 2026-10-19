@@ -50,11 +50,6 @@ vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.splitbelow = true -- Horizontal split below current.
 vim.opt.splitright = true -- Vertical split to right of current.
 
--- netrw
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
-vim.g.netrw_winsize = 25
-
 -- text editing
 vim.opt.joinspaces = false -- Prevents inserting two spaces after punctuation on a join (J).
 --vim.opt.formatoptions = vim.opt.formatoptions + { 'o' }  -- Continue comment marker in new lines.

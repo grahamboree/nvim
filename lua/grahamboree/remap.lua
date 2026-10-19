@@ -1,9 +1,6 @@
 local utils = require("grahamboree.utils")
 local map = vim.keymap.set
 
--- NetRW
-map("n", "<leader>pv", vim.cmd.Ex, { desc = "File explorer" })
-
 -- clear search highlight
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", { desc = "Clear search highlight" })
 
