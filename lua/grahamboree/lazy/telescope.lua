@@ -4,6 +4,28 @@ return {
         'nvim-lua/plenary.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
+    -- Loaded on first use: any key below, :Telescope, or a require() of a
+    -- telescope module (lazy.nvim handles the last one, e.g. from utils.lua).
+    cmd = "Telescope",
+    keys = {
+        { "<leader>pf", function() require("telescope.builtin").find_files() end, desc = "Find files" },
+        { "<leader>pb", function() require("telescope.builtin").buffers() end, desc = "Buffers" },
+        { "<leader>pg", function() require("telescope.builtin").live_grep() end, desc = "Live grep" },
+        { "<leader>ph", function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
+        { "<leader>/", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Fuzzy find in buffer" },
+        {
+            "<leader>g",
+            function() require("telescope.builtin").live_grep { default_text = vim.fn.expand("<cword>") } end,
+            desc = "Grep word under cursor",
+        },
+        {
+            "<leader>g",
+            function() require("telescope.builtin").live_grep { default_text = require("grahamboree.utils").get_visual_text() } end,
+            mode = "v",
+            desc = "Grep selection",
+        },
+        { "<leader>lrr", function() require("telescope.builtin").lsp_references() end, desc = "References" },
+    },
     config = function()
         local telescope = require("telescope")
         telescope.setup {
@@ -25,22 +47,5 @@ return {
         }
         -- use the native fzf sorter for all pickers
         telescope.load_extension("fzf")
-
-        local builtin = require("telescope.builtin")
-        local utils = require("grahamboree.utils")
-        local map = vim.keymap.set
-
-        map("n", "<leader>pf", builtin.find_files, { desc = "Find files" })
-        map("n", "<leader>pb", builtin.buffers, { desc = "Buffers" })
-        map("n", "<leader>pg", builtin.live_grep, { desc = "Live grep" })
-        map("n", "<leader>ph", builtin.help_tags, { desc = "Help tags" })
-        map("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy find in buffer" })
-        map("n", "<leader>g", function()
-            builtin.live_grep { default_text = vim.fn.expand("<cword>") }
-        end, { desc = "Grep word under cursor" })
-        map("v", "<leader>g", function()
-            builtin.live_grep { default_text = utils.get_visual_text() }
-        end, { desc = "Grep selection" })
-        map("n", "<leader>lrr", builtin.lsp_references, { desc = "References" })
     end
 }
