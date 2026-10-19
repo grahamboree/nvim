@@ -43,8 +43,8 @@ vim.keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>")
 vim.keymap.set("n", "Q", "@q")
 
 -- error navigation to mimic Rider
-vim.keymap.set("n", "<leader>v", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<leader>c", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "<leader>v", function() vim.diagnostic.jump({ count = 1, float = true }) end)
+vim.keymap.set("n", "<leader>c", function() vim.diagnostic.jump({ count = -1, float = true }) end)
 
 -- Change ctrl+w o to toggle between maximizing a window
 -- Reduces pain of accidentally hitting it

@@ -8,7 +8,7 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd("TextYankPost", {
     pattern = "*",
     callback = function()
-        vim.highlight.on_yank({
+        vim.hl.on_yank({
             higroup = "IncSearch",
             timeout = 40,
         })
@@ -58,12 +58,12 @@ autocmd("LspAttach", {
 
         -- Diagnostics
         vim.keymap.set("n", "<leader>ld", function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
+        vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+        vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
 
         -- Inlay hints (enable by default, toggle with <leader>lh)
         local client = vim.lsp.get_client_by_id(e.data.client_id)
-        if client and client.supports_method("textDocument/inlayHint") then
+        if client and client:supports_method("textDocument/inlayHint") then
             vim.lsp.inlay_hint.enable(true, { bufnr = e.buf })
         end
         vim.keymap.set("n", "<leader>lh", function()
