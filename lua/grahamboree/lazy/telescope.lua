@@ -18,6 +18,7 @@ return {
                     "dist/",
                     "obj/",
                     "__pycache__/",
+                    "%.meta$",
                 }
             }
         }
