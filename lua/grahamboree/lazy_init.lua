@@ -18,7 +18,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = "grahamboree.lazy",
-    -- change_detection = { notify = false }
-    -- automatically check for plugin updates
-    checker = { enabled = true },
+    -- automatically check for plugin updates, but do not pop a notification
+    checker = { enabled = true, notify = false },
 })
