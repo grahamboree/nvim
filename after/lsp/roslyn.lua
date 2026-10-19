@@ -1,9 +1,10 @@
 -- Merged over roslyn.nvim's defaults. The server itself comes from
 -- :MasonInstall roslyn-language-server (managed by mason-tool-installer).
 
--- Root of the dotnet install that the `dotnet` on PATH belongs to. Mason's
--- apphost otherwise finds a stale /usr/local/share/dotnet. Homebrew puts the
--- launcher in bin/ and the runtime in libexec/.
+-- Root of the dotnet install that the `dotnet` on PATH belongs to, so the
+-- server uses the same SDK as the shell. On Windows and with official
+-- installers the launcher sits in the root; Homebrew puts it in bin/ with
+-- the runtime in libexec/, hence the second candidate.
 local function dotnet_root()
     if vim.env.DOTNET_ROOT then return vim.env.DOTNET_ROOT end
     local exe = vim.fn.resolve(vim.fn.exepath("dotnet"))

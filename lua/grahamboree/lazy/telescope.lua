@@ -2,7 +2,13 @@ return {
     'nvim-telescope/telescope.nvim',
     dependencies = {
         'nvim-lua/plenary.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        {
+            'nvim-telescope/telescope-fzf-native.nvim',
+            -- no prebuilt binaries; make on Unix, cmake + MSVC build tools on Windows
+            build = jit.os == 'Windows'
+                and 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release --target install'
+                or 'make',
+        },
     },
     -- Loaded on first use: any key below, :Telescope, or a require() of a
     -- telescope module (lazy.nvim handles the last one, e.g. from utils.lua).
