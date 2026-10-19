@@ -43,21 +43,17 @@ vim.api.nvim_create_autocmd("FileChangedRO", {
     desc = "Automatically run p4 edit on read-only files",
 })
 
--- LSP keybinds
+-- LSP keybinds. Neovim already provides K (hover), grn (rename), gra (code
+-- action), grr (references), gri (implementation), grt (type definition),
+-- gO (document symbols), <C-S> (signature help, insert) and <C-W>d
+-- (line diagnostics), so only mappings without a built-in live here.
 autocmd("LspAttach", {
     callback = function(e)
         local opts = { buffer = e.buf }
         vim.keymap.set("n", "<leader>lg", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, vim.tbl_extend("force", opts, { desc = "Hover" }))
         vim.keymap.set("n", "<leader>lws", vim.lsp.buf.workspace_symbol, vim.tbl_extend("force", opts, { desc = "Workspace symbols" }))
-        vim.keymap.set("n", "<leader>lca", vim.lsp.buf.code_action, vim.tbl_extend("force", opts, { desc = "Code action" }))
-        -- done in telescope instead...
-        --vim.keymap.set("n", "<leader>lrr", function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set("n", "<leader>lrn", vim.lsp.buf.rename, vim.tbl_extend("force", opts, { desc = "Rename symbol" }))
-        --vim.keymap.set("i", "<leader>lh", function() vim.lsp.buf.signature_help() end, opts)
 
-        -- Diagnostics
-        vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float, vim.tbl_extend("force", opts, { desc = "Line diagnostics" }))
+        -- Diagnostics: like the built-in ]d / [d but also opens the float
         vim.keymap.set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end, vim.tbl_extend("force", opts, { desc = "Next diagnostic" }))
         vim.keymap.set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end, vim.tbl_extend("force", opts, { desc = "Previous diagnostic" }))
 
