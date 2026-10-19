@@ -3,6 +3,9 @@ local utils = require("grahamboree.utils")
 -- NetRW
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
+-- clear search highlight
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<cr>")
+
 -- keep cursor position when joining lines
 vim.keymap.set("n", "J", "mzJ`z")
 
