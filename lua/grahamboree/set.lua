@@ -30,7 +30,7 @@ vim.opt.termguicolors = true
 vim.opt.wrap = false      -- No line wrapping
 vim.opt.scrolloff = 8     -- Keep the cursor at least 8 lines from the top or bottom of the window
 vim.opt.signcolumn = "yes" -- Always draw the sign column so text does not shift when diagnostics appear
-vim.opt.textwidth = 0     -- Hard-wrap long lines as you type them.
+vim.opt.textwidth = 0     -- Never hard-wrap lines as you type.
 vim.opt.linespace = 0     -- Set line-spacing to minimum.
 
 -- UI/UX
