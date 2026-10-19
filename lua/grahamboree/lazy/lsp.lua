@@ -80,14 +80,12 @@ return {
 
         require("mason").setup()
         require("mason-lspconfig").setup({
-            ensure_installed = {
-                "lua_ls",
-                "clangd",
-            },
-            -- roslyn.nvim manages the Roslyn server itself; stop mason-lspconfig
-            -- from also enabling nvim-lspconfig's roslyn_ls for the same binary.
+            -- installs are handled by mason-tool-installer
             automatic_enable = {
-                exclude = { "roslyn_ls" },
+                exclude = {
+                    "roslyn_ls", -- roslyn.nvim starts the Roslyn server itself
+                    "stylua",    -- a formatter run by conform, not wanted as an LSP
+                },
             },
         })
 
