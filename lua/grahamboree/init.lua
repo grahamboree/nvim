@@ -30,7 +30,12 @@ autocmd({ "FocusGained", "BufEnter", "TermClose" }, {
 -- trim trailing whitespace on save
 autocmd("BufWritePre", {
     pattern = "*",
-    command = [[let save_cursor = getpos(".") | %s/\s\+$//e | call setpos(".", save_cursor)]],
+    callback = function()
+        if not vim.bo.modifiable then return end
+        local save_cursor = vim.fn.getpos(".")
+        vim.cmd([[%s/\s\+$//e]])
+        vim.fn.setpos(".", save_cursor)
+    end,
 })
 
 -- Auto p4 edit for read-only files
