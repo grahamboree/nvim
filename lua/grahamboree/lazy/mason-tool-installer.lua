@@ -9,6 +9,7 @@ return {
             "clangd",
             "roslyn-language-server", -- C#, used by roslyn.nvim
             "stylua",                 -- Lua formatter, used by conform
+            "tree-sitter-cli",        -- nvim-treesitter (main) needs it to build parsers
         },
     },
 }

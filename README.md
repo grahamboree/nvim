@@ -8,19 +8,19 @@ Plugins are installed by lazy.nvim and language servers by Mason on first
 launch. These must already be on `PATH`:
 
 ```sh
-brew install neovim ripgrep fd tree-sitter-cli clang-format dotnet
+brew install neovim ripgrep fd clang-format dotnet
 ```
 
 | Tool | Used by |
 |---|---|
 | `rg`, `fd` | Telescope file finding and live grep |
-| `tree-sitter` | nvim-treesitter, to compile parsers (needs a C compiler too) |
 | `clang-format` | conform, for C and C++ |
 | `dotnet` | the Roslyn C# language server |
 | `make`, `cc` | building telescope-fzf-native and treesitter parsers |
 
 Mason installs the rest on startup via mason-tool-installer: clangd,
-lua-language-server, roslyn-language-server and stylua.
+lua-language-server, roslyn-language-server, stylua and the `tree-sitter`
+CLI that nvim-treesitter uses to compile parsers.
 
 ### Windows
 
@@ -30,13 +30,9 @@ Clone to `%LOCALAPPDATA%\nvim` instead. The same tools come from winget:
 winget install Neovim.Neovim BurntSushi.ripgrep.MSVC sharkdp.fd LLVM.LLVM Microsoft.DotNet.SDK.10 Kitware.CMake
 ```
 
-LLVM provides both `clang-format` and the C compiler treesitter needs.
-Two more things are required:
-
-- the `tree-sitter` CLI, from its GitHub releases or `cargo install
-  tree-sitter-cli`, on `PATH`
-- the Microsoft C++ Build Tools, which CMake uses to build
-  telescope-fzf-native
+LLVM provides `clang-format`. The Microsoft C++ Build Tools are also
+required: CMake uses them to build telescope-fzf-native, and the
+`tree-sitter` CLI finds them to compile parsers.
 
 The config picks the right build command and clangd compiler globs by
 checking `jit.os`, so nothing needs editing. On Windows the shell is set to
@@ -49,8 +45,9 @@ must be on `PATH`.
 1. Clone to `~/.config/nvim` and start `nvim`.
 2. lazy.nvim bootstraps itself and installs every plugin pinned in
    `lazy-lock.json`.
-3. Treesitter compiles its parsers and Mason installs its tools in the
-   background. Restart once they finish.
+3. Mason installs its tools in the background. Restart once they finish;
+   treesitter then compiles its parsers using the `tree-sitter` CLI Mason
+   installed. Restart again once that finishes.
 
 ## Layout
 

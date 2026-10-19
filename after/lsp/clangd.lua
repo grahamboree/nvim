@@ -8,6 +8,10 @@ local query_driver = jit.os == "Windows"
     or "--query-driver=/usr/bin/c++,/usr/bin/cc,/usr/bin/clang,/usr/bin/clang++"
 
 return {
+    -- nvim-lspconfig's list also has "c.doxygen" and "cpp.doxygen", which
+    -- :checkhealth vim.lsp flags as unknown filetypes. They are only set when
+    -- g:load_doxygen_syntax is on, which this config never does.
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
     cmd = {
         "clangd",
         "--background-index",

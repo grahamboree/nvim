@@ -20,4 +20,6 @@ require("lazy").setup({
     spec = "grahamboree.lazy",
     -- automatically check for plugin updates, but do not pop a notification
     checker = { enabled = true, notify = false },
+    -- no plugin needs luarocks; skip the hererocks bootstrap and its health warnings
+    rocks = { enabled = false },
 })
