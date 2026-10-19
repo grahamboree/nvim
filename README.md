@@ -22,6 +22,26 @@ brew install neovim ripgrep fd tree-sitter-cli clang-format dotnet
 Mason installs the rest on startup via mason-tool-installer: clangd,
 lua-language-server, roslyn-language-server and stylua.
 
+### Windows
+
+Clone to `%LOCALAPPDATA%\nvim` instead. The same tools come from winget:
+
+```powershell
+winget install Neovim.Neovim BurntSushi.ripgrep.MSVC sharkdp.fd LLVM.LLVM Microsoft.DotNet.SDK.10 Kitware.CMake
+```
+
+LLVM provides both `clang-format` and the C compiler treesitter needs.
+Two more things are required:
+
+- the `tree-sitter` CLI, from its GitHub releases or `cargo install
+  tree-sitter-cli`, on `PATH`
+- the Microsoft C++ Build Tools, which CMake uses to build
+  telescope-fzf-native
+
+The config picks the right build command and clangd compiler globs by
+checking `jit.os`, so nothing needs editing. `p4 edit` on read-only files
+works as long as `p4.exe` is on `PATH`.
+
 ## First launch
 
 1. Clone to `~/.config/nvim` and start `nvim`.
