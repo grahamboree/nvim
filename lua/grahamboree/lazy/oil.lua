@@ -9,6 +9,10 @@ return {
         skip_confirm_for_simple_edits = true,
         view_options = {
             show_hidden = true,
+            -- Hide Unity .meta files even though show_hidden is on.
+            is_always_hidden = function(name, _)
+                return name:sub(-5) == ".meta"
+            end,
         },
     },
     keys = {
