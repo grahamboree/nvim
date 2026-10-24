@@ -1,6 +1,7 @@
 require("grahamboree.set")
 require("grahamboree.remap")
 require("grahamboree.lazy_init")
+require("grahamboree.codelens") -- code lenses at end of line, not above
 
 local autocmd = vim.api.nvim_create_autocmd
 
