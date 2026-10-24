@@ -6,6 +6,7 @@ return {
             { "<leader>l",  group = "LSP" },
             { "<leader>lw", group = "workspace" },
             { "<leader>lr", group = "references" },
+            { "<leader>h",  group = "git hunks" },
             { "<leader>p",  group = "find/files" },
             { "<leader>x",  group = "diagnostics" },
         },

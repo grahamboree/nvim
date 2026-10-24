@@ -44,9 +44,10 @@ vim.opt.cursorline = true  -- Highlight the cursor's line to make it easier to s
 vim.opt.modeline = true    -- Enable modeline.
 
 -- folds and splits
-vim.opt.foldlevel = 99
-vim.opt.foldmethod = "expr" -- Fold using treesitter
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99      -- Start with everything open (nvim-ufo manages folds)
+vim.opt.foldlevelstart = 99
+vim.opt.foldcolumn = "1"    -- Fold markers in the gutter
+vim.opt.fillchars:append({ fold = " ", foldopen = "▾", foldclose = "▸", foldsep = " ", eob = " " })
 vim.opt.splitbelow = true -- Horizontal split below current.
 vim.opt.splitright = true -- Vertical split to right of current.
 
