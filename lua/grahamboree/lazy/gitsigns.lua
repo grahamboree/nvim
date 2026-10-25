@@ -3,6 +3,16 @@ return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
+        -- Thin bars instead of the default heavy ones.
+        signs = {
+            add = { text = "│" },
+            change = { text = "│" },
+            untracked = { text = "┊" },
+        },
+        signs_staged = {
+            add = { text = "│" },
+            change = { text = "│" },
+        },
         current_line_blame_opts = { delay = 500 },
         on_attach = function(bufnr)
             local gs = require("gitsigns")
